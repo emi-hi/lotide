@@ -1,7 +1,7 @@
-const eqArrays = function(array1, array2) {
-  if (array1.length === array2.length) {
-    for (let i = 0; i < array1.length; i ++) {
-      if (array1[i] !== array2[i]) {
+const eqArrays = function(actual, expected) {
+  if (actual.length === expected.length) {
+    for (let i = 0; i < actual.length; i ++) {
+      if (actual[i] !== expected[i]) {
         return false;
       }
     }
@@ -9,14 +9,15 @@ const eqArrays = function(array1, array2) {
     return false;
   } return true;
 };
-
-const assertArraysEqual = function(array1, array2) {
-  const trueOrFalse = eqArrays(array1, array2);
-  if (trueOrFalse === true) {
-    console.log(`✅ ${array1} and ${array2} are the same!`);
+const assertArraysEqual = function(actual, expected) {
+  const trueOrFalse = eqArrays(actual, expected);
+  let outputString;
+  if (trueOrFalse) {
+    outputString = `✅ ${actual} and ${expected} are the same!`;
   } else {
-    console.log(`❌ ${array1} and ${array2} are not the same!`);
+    outputString = `❌ ${actual} and ${expected} are not the same!`;
   }
+  console.log(outputString);
 };
 
 const flatten = function(inputArr) {
