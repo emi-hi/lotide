@@ -6,17 +6,35 @@ const assertEqual = function(actual, expected) {
   }
 };
 
-const eqArrays = function(array1, array2) {
-  if (array1.length === array2.length) {
-    for (let i = 0; i < array1.length; i ++) {
-      if (array1[i] !== array2[i]) {
-        return false;
+const eqArrays = function(actual, expected) {
+  let result;
+  if (Array.isArray(actual) && Array.isArray(expected)) {
+    if (actual.length === expected.length) {
+      for (let i = 0; i < actual.length; i ++) { //for each item in array
+        if (Array.isArray(actual[i]) && Array.isArray(expected[i])) { //both items arrs
+          result = eqArrays(actual[i], expected[i]); //recursive
+        } else if (Array.isArray(actual[i]) || Array.isArray(expected[i])) { //one array
+          result = false;
+        } else if (actual[i] !== expected[i]) {
+          result = false;
+        } else {
+          result = true;
+        }
       }
+    } else {
+      result = false;
     }
-  } else {
-      return false;
+  } else if (Array.isArray(actual) || Array.isArray(expected)) {
+    result = false;
+  } else if (!Array.isArray(actual) && !Array.isArray(expected)) {
+    if (actual === expected) {
+      return true;
+    }
   }
-  return true
+  return result;
 };
 
 assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true);
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4]]), true); // => true
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], [4, 5]]), false);// => false
+assertEqual(eqArrays([[2, 3], [4]], [[2, 3], 4]), false); // => false
