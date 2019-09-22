@@ -10,7 +10,7 @@ const assertEqual = function(actual, expected) {
 };
 
 const eqObjects = function(object1, object2) {
-  let result = false;
+  let result;
   if (Object.keys(object1).length === Object.keys(object2).length) {
     for (let key in object1) {
       if (key in object2) {
@@ -18,18 +18,31 @@ const eqObjects = function(object1, object2) {
           if (Array.isArray(object1[key])) {
             result = eqArrays(object1[key], object2[key]);
           }
+        } else if (typeof object1[key] === "object") {
+          if (typeof object2[key] === "object") {
+            result = eqObjects(object1[key], object2[key]);
+            if (result === 'false') {
+              return false;
+            }
+          } else {
+            return false;
+          }
         } else {
           if (object1[key] === object2[key]) {
-            result = true;
+            if (result !== false) {
+              result = true;
+            }
           }
           if (object1[key] !== object2[key]) {
-            result = false;
-            return result;
+            return false;
           }
         }
       }
     }
-  } return result;
+  } else {
+    return false;
+  }
+  return result;
 };
 
 const eqArrays = function(actual, expected) {
@@ -43,10 +56,7 @@ const eqArrays = function(actual, expected) {
     return false;
   } return true;
 };
-const cd = { c: "1", d: ["2", 3] };
-const dc = { d: ["2", 3], c: "1" };
-assertEqual(eqObjects(cd, dc), true); // => true
 
-const cd2 = { c: "1", d: ["2", 3, 4] };
-assertEqual(eqObjects(cd, cd2), false); // => false
-
+console.log(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }));// => true
+console.log(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })); // => false
+console.log(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 })); // => false
