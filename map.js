@@ -4,7 +4,7 @@ const map = function(array, callback) {
     results.push(callback(item));
   }
   return results;
-}
+};
 
 module.exports = map;
 
