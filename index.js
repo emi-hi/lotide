@@ -1,40 +1,19 @@
-const assertArraysEqual = require('./assertArraysEqual');
-const assertEqual       = require('./assertEqual');
-const eqObjects         = require('./eqObjects'); 
-const assertObjectsEqual= require('./assertObjectsEqual');
-const countLetters      = require('./countLetters');
-const countOnly         = require('./countOnly');
-const eqArrays          = require('./eqArrays');
-const findKey           = require('./findKey');
-const findKeyByValue    = require('./findKeyByValue');
-const flatten           = require('./flatten');
-const head              = require('./head');
-const letterPositions   = require('./letterPositions');
-const map               = require('./map');
-const middle            = require('./middle');
-const tail              = require('./tail');
-const takeUntil         = require('./takeUntil');
-const without           = require('./without');
-
 module.exports = {
-  assertArraysEqual : assertArraysEqual,
-  assertEqual       : assertEqual,
-  assertObjectsEqual: assertObjectsEqual,
-  countLetters      : countLetters,
-  countOnly         : countOnly,
-  eqArrays          : eqArrays,
-  eqObjects         : eqObjects,
-  findKey           : findKey,
-  findKeyByValue    : findKeyByValue,
-  flatten           : flatten,
-  head              : head,
-  letterPositions   : letterPositions,
-  map               : map,
-  middle            : middle,
-  tail              : tail,
-  takeUntil         : takeUntil,
-  without           : without
-
+  assertArraysEqual : require('./assertArraysEqual'),
+  assertEqual       : require('./assertEqual'),
+  assertObjectsEqual: require('./assertObjectsEqual'),
+  countLetters      : require('./countLetters'),
+  countOnly         : require('./countOnly'),
+  eqArrays          : require('./eqArrays'),
+  eqObjects         : require('./eqObjects'),
+  findKey           : require('./findKey'),
+  findKeyByValue    : require('./findKeyByValue'),
+  flatten           : require('./flatten'),
+  head              : require('./head'),
+  letterPositions   : require('./letterPositions'),
+  map               : require('./map'),
+  middle            : require('./middle'),
+  tail              : require('./tail'),
+  takeUntil         : require('./takeUntil'),
+  without           : require('./without')
 };
-
-//          // 
